@@ -1,307 +1,77 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Добро пожаловать в N.H.K, Все серии.</title>
-  <link href="https://vjs.zencdn.net/8.23.4/video-js.css" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #0a1120;
-      color: #e6f1ff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-      line-height: 1.5;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1000px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    header {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 30px;
-      padding: 20px 0;
-    }
-
-    .title {
-      font-size: 24px;
-      font-weight: 600;
-      color: #64ffda;
-      margin-bottom: 8px;
-      letter-spacing: 0.5px;
-    }
-
-    .subtitle {
-      font-size: 16px;
-      color: #8892b0;
-      font-weight: 400;
-    }
-
-    main {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 30px;
-    }
-
-    .video-container {
-      position: relative;
-      width: 100%;
-      max-width: 900px;
-      background: #000;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    }
-
-    .video-container video {
-      width: 100%;
-      display: block;
-    }
-
-    .video-js {
-      width: 100%;
-      height: auto;
-      min-height: 300px;
-    }
-
-    .info-section {
-      width: 100%;
-      max-width: 900px;
-      padding: 0 10px;
-    }
-
-    .info-title {
-      color: #64ffda;
-      margin-bottom: 15px;
-      font-size: 20px;
-      font-weight: 500;
-    }
-
-    .info-text {
-      color: #a8b2d1;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    .save-indicator {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(100, 255, 218, 0.9);
-      color: #0a1120;
-      padding: 8px 12px;
-      border-radius: 4px;
-      font-size: 14px;
-      font-weight: 500;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 1000;
-    }
-
-    .save-indicator.show {
-      opacity: 1;
-    }
-
-    footer {
-      margin-top: 40px;
-      font-size: 14px;
-      text-align: center;
-      color: #495670;
-      padding: 20px 0;
-      width: 100%;
-      max-width: 900px;
-      border-top: 1px solid rgba(100, 255, 218, 0.1);
-    }
-
-    /* Кастомные стили для видеоплеера */
-    .video-js .vjs-control-bar {
-      background: rgba(10, 17, 32, 0.9);
-      font-size: 14px;
-      height: 50px;
-    }
-    
-    .video-js .vjs-play-progress,
-    .video-js .vjs-volume-level {
-      background-color: #64ffda;
-    }
-    
-    .video-js .vjs-slider {
-      background-color: rgba(100, 255, 218, 0.2);
-    }
-    
-    .video-js .vjs-big-play-button {
-      background-color: rgba(100, 255, 218, 0.2);
-      border: 1px solid #64ffda;
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      line-height: 80px;
-      margin-top: -40px;
-      margin-left: -40px;
-    }
-    
-    .video-js:hover .vjs-big-play-button {
-      background-color: rgba(100, 255, 218, 0.3);
-    }
-
-    /* Исправление отображения времени */
-    .video-js .vjs-time-control {
-      font-size: 14px;
-      padding: 0 8px;
-      display: block !important;
-    }
-
-    .video-js .vjs-remaining-time {
-      display: none !important;
-    }
-
-    .video-js .vjs-duration,
-    .video-js .vjs-current-time {
-      color: #e6f1ff;
-      font-size: 14px;
-      padding: 0 8px;
-    }
-
-    .video-js .vjs-time-divider {
-      color: #8892b0;
-      padding: 0 4px;
-      display: block !important;
-    }
-
-    /* Адаптивность для мобильных устройств */
-    @media (max-width: 768px) {
-      body {
-        padding: 15px;
-      }
-      
-      .title {
-        font-size: 20px;
-      }
-      
-      .subtitle {
-        font-size: 14px;
-      }
-      
-      .info-title {
-        font-size: 18px;
-      }
-      
-      .info-text {
-        font-size: 15px;
-      }
-      
-      .save-indicator {
-        top: 10px;
-        right: 10px;
-        font-size: 12px;
-        padding: 6px 10px;
-      }
-      
-      .video-js .vjs-control-bar {
-        font-size: 12px;
-        height: 45px;
-      }
-      
-      .video-js .vjs-time-control {
-        font-size: 12px;
-        padding: 0 6px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .title {
-        font-size: 18px;
-      }
-      
-      .video-container {
-        border-radius: 4px;
-      }
-      
-      .video-js .vjs-time-control {
-        font-size: 11px;
-        padding: 0 4px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добро пожаловать в N.H.K, Все серии.</title>
+    <link href="https://vjs.zencdn.net/8.23.4/video-js.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="static/css/anime.css">
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <div class="save-indicator" id="saveIndicator">Позиция сохранена</div>
-    
-    <header>
-      <h1 class="title">Добро пожаловать в N.H.K</h1>
-      <p class="subtitle">Все серии</p>
-    </header>
-    
-    <main>
-      <section class="video-container">
-        <video
-          id="my-video"
-          class="video-js vjs-default-skin"
-          controls
-          preload="auto"
-          poster=""
-          data-setup='{}'
-        >
-          <source src="https://vkvd514.okcdn.ru/?srcIp=62.109.4.81&pr=40&expires=1764805101652&srcAg=CHROME&fromCache=1&ms=185.226.55.152&type=2&subId=8337745644048&sig=-ZkFhq9XFgc&ct=0&urls=185.226.52.165&clientType=13&appId=512000384397&id=7885850807000" type="video/mp4" />
-          <p class="vjs-no-js">
-            Включите JavaScript и используйте браузер, поддерживающий HTML5 видео
-          </p>
-        </video>
-      </section>
-      
-      <section class="info-section">
-        <h2 class="info-title">О сериале</h2>
-        <p class="info-text">«Добро пожаловать в NHK!» — это история о Тацухиро Сато, 22-летнем хикикомори (затворнике), который верит, что за его проблемами стоит таинственная организация «NHK». </p>
-      </section>
-    </main>
-    
-    <footer>
-      © 2025 Смотри Аниме на AniWatch!
-    </footer>
-  </div>
 
-  <script src="https://vjs.zencdn.net/8.23.4/video.min.js"></script>
-  <script>
+    <header>
+        <h1 class="title">Добро пожаловать в N.H.K</h1>
+        <p class="subtitle">Все серии</p>
+    </header>
+
+    <main>
+        <section class="video-container">
+            <video
+                    id="my-video"
+                    class="video-js vjs-default-skin"
+                    controls
+                    preload="auto"
+                    poster=""
+                    data-setup='{}'
+            >
+                <source src="https://vkvd514.okcdn.ru/?srcIp=62.109.4.81&pr=40&expires=1764805101652&srcAg=CHROME&fromCache=1&ms=185.226.55.152&type=2&subId=8337745644048&sig=-ZkFhq9XFgc&ct=0&urls=185.226.52.165&clientType=13&appId=512000384397&id=7885850807000"
+                        type="video/mp4"/>
+                <p class="vjs-no-js">
+                    Включите JavaScript и используйте браузер, поддерживающий
+                    HTML5 видео
+                </p>
+            </video>
+        </section>
+
+        <section class="info-section">
+            <h2 class="info-title">О сериале</h2>
+            <p class="info-text">«Добро пожаловать в NHK!» — это история о
+                Тацухиро Сато, 22-летнем хикикомори (затворнике), который
+                верит, что за его проблемами стоит таинственная организация
+                «NHK». </p>
+        </section>
+    </main>
+
+    <footer>
+        © 2025 Смотри Аниме на AniWatch!
+    </footer>
+</div>
+
+<script src="https://vjs.zencdn.net/8.23.4/video.min.js"></script>
+<script>
     // Инициализация видеоплеера с правильной конфигурацией элементов времени
     const player = videojs('my-video', {
-      fluid: true,
-      responsive: true,
-      playbackRates: [0.5, 1, 1.25, 1.5, 2],
-      controlBar: {
-        volumePanel: {
-          inline: false
+        fluid: true,
+        responsive: true,
+        playbackRates: [0.5, 1, 1.25, 1.5, 2],
+        controlBar: {
+            volumePanel: {
+                inline: false
+            }
         }
-      }
     });
 
     // Элемент для показа уведомлений
     const saveIndicator = document.getElementById('saveIndicator');
-    
+
     // Функция для показа уведомления
     function showSaveIndicator() {
-      saveIndicator.classList.add('show');
-      setTimeout(() => {
-        saveIndicator.classList.remove('show');
-      }, 2000);
+        saveIndicator.classList.add('show');
+        setTimeout(() => {
+            saveIndicator.classList.remove('show');
+        }, 2000);
     }
 
     // Ключ для сохранения в localStorage
@@ -310,107 +80,107 @@
 
     // Загрузка сохраненной позиции
     function loadVideoPosition() {
-      try {
-        const savedPosition = localStorage.getItem(VIDEO_POSITION_KEY);
-        if (savedPosition) {
-          const position = parseFloat(savedPosition);
-          console.log('Загружена позиция:', position);
-          
-          if (player.readyState() >= 1) {
-            if (position > 0 && position < player.duration()) {
-              player.currentTime(position);
-              console.log('Позиция восстановлена:', formatTime(position));
+        try {
+            const savedPosition = localStorage.getItem(VIDEO_POSITION_KEY);
+            if (savedPosition) {
+                const position = parseFloat(savedPosition);
+                console.log('Загружена позиция:', position);
+
+                if (player.readyState() >= 1) {
+                    if (position > 0 && position < player.duration()) {
+                        player.currentTime(position);
+                        console.log('Позиция восстановлена:', formatTime(position));
+                    }
+                } else {
+                    player.one('loadedmetadata', function () {
+                        if (position > 0 && position < player.duration()) {
+                            player.currentTime(position);
+                            console.log('Позиция восстановлена (после загрузки):', formatTime(position));
+                        }
+                    });
+                }
             }
-          } else {
-            player.one('loadedmetadata', function() {
-              if (position > 0 && position < player.duration()) {
-                player.currentTime(position);
-                console.log('Позиция восстановлена (после загрузки):', formatTime(position));
-              }
-            });
-          }
+        } catch (error) {
+            console.error('Ошибка при загрузке позиции:', error);
         }
-      } catch (error) {
-        console.error('Ошибка при загрузке позиции:', error);
-      }
     }
 
     // Сохранение текущей позиции
     function saveVideoPosition() {
-      try {
-        const currentTime = player.currentTime();
-        if (currentTime && currentTime > 0) {
-          localStorage.setItem(VIDEO_POSITION_KEY, currentTime.toString());
-          console.log('Позиция сохранена:', formatTime(currentTime));
+        try {
+            const currentTime = player.currentTime();
+            if (currentTime && currentTime > 0) {
+                localStorage.setItem(VIDEO_POSITION_KEY, currentTime.toString());
+                console.log('Позиция сохранена:', formatTime(currentTime));
+            }
+        } catch (error) {
+            console.error('Ошибка при сохранении позиции:', error);
         }
-      } catch (error) {
-        console.error('Ошибка при сохранении позиции:', error);
-      }
     }
 
     // Форматирование времени в читаемый вид
     function formatTime(seconds) {
-      const minutes = Math.floor(seconds / 60);
-      const secs = Math.floor(seconds % 60);
-      return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
     }
 
     // Автоматическое сохранение
     let saveInterval;
-    
-    player.ready(function() {
-      console.log('Плеер готов');
-      
-      // Загружаем сохраненную позицию
-      setTimeout(loadVideoPosition, 1000);
-      
-      // Запускаем интервал сохранения
-      saveInterval = setInterval(saveVideoPosition, SAVE_INTERVAL);
-      
-      // Сохраняем позицию при паузе
-      player.on('pause', function() {
-        saveVideoPosition();
-        showSaveIndicator();
-      });
-      
-      // Сохраняем позицию при смене времени вручную
-      player.on('seeked', function() {
-        setTimeout(saveVideoPosition, 500);
-      });
-      
-      // Сохраняем позицию при завершении видео
-      player.on('ended', function() {
-        localStorage.removeItem(VIDEO_POSITION_KEY);
-        console.log('Видео завершено, позиция очищена');
-      });
-      
-      // Сохраняем позицию при закрытии страницы
-      window.addEventListener('beforeunload', saveVideoPosition);
-      window.addEventListener('pagehide', saveVideoPosition);
+
+    player.ready(function () {
+        console.log('Плеер готов');
+
+        // Загружаем сохраненную позицию
+        setTimeout(loadVideoPosition, 1000);
+
+        // Запускаем интервал сохранения
+        saveInterval = setInterval(saveVideoPosition, SAVE_INTERVAL);
+
+        // Сохраняем позицию при паузе
+        player.on('pause', function () {
+            saveVideoPosition();
+            showSaveIndicator();
+        });
+
+        // Сохраняем позицию при смене времени вручную
+        player.on('seeked', function () {
+            setTimeout(saveVideoPosition, 500);
+        });
+
+        // Сохраняем позицию при завершении видео
+        player.on('ended', function () {
+            localStorage.removeItem(VIDEO_POSITION_KEY);
+            console.log('Видео завершено, позиция очищена');
+        });
+
+        // Сохраняем позицию при закрытии страницы
+        window.addEventListener('beforeunload', saveVideoPosition);
+        window.addEventListener('pagehide', saveVideoPosition);
     });
 
     // Обработчики ошибок
-    player.on('error', function() {
-      console.log('Ошибка загрузки видео');
+    player.on('error', function () {
+        console.log('Ошибка загрузки видео');
     });
 
-    player.on('loadeddata', function() {
-      console.log('Видео успешно загружено');
+    player.on('loadeddata', function () {
+        console.log('Видео успешно загружено');
     });
-    
+
     // Очистка интервала при размонтировании
-    player.on('dispose', function() {
-      if (saveInterval) {
-        clearInterval(saveInterval);
-      }
+    player.on('dispose', function () {
+        if (saveInterval) {
+            clearInterval(saveInterval);
+        }
     });
 
     // Дополнительная проверка для мобильных устройств
-    document.addEventListener('visibilitychange', function() {
-      if (document.hidden) {
-        saveVideoPosition();
-      }
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+            saveVideoPosition();
+        }
     });
-  </script>
+</script>
 </body>
 </html>
