@@ -1,331 +1,126 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AniWatch - Главная страница</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #0a1120;
-      color: #e6f1ff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-      line-height: 1.5;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    header {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 40px;
-      padding: 20px 0;
-    }
-
-    .logo {
-      font-size: 48px;
-      font-weight: 700;
-      color: #64ffda;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-      text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
-    }
-
-    .tagline {
-      font-size: 18px;
-      color: #8892b0;
-      font-weight: 400;
-    }
-
-    .search-container {
-      width: 100%;
-      max-width: 600px;
-      margin: 20px 0 30px;
-      display: flex;
-      gap: 10px;
-    }
-
-    .search-input {
-      flex: 1;
-      padding: 12px 20px;
-      background: rgba(16, 24, 39, 0.8);
-      border: 1px solid rgba(100, 255, 218, 0.3);
-      border-radius: 8px;
-      color: #e6f1ff;
-      font-size: 16px;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: #64ffda;
-      box-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
-    }
-
-    .search-btn {
-      padding: 12px 25px;
-      background: rgba(100, 255, 218, 0.1);
-      border: 1px solid rgba(100, 255, 218, 0.3);
-      border-radius: 8px;
-      color: #64ffda;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .search-btn:hover {
-      background: rgba(100, 255, 218, 0.2);
-    }
-
-    main {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 30px;
-    }
-
-    .anime-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 30px;
-      width: 100%;
-      margin-bottom: 40px;
-    }
-
-    .anime-card {
-      background: rgba(16, 24, 39, 0.8);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .anime-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .anime-preview {
-      width: 100%;
-      height: 350px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .anime-btn {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      background: rgba(100, 255, 218, 0.1);
-      border: none;
-      color: #64ffda;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      text-align: center;
-    }
-
-    .anime-btn:hover {
-      background: rgba(100, 255, 218, 0.2);
-    }
-
-    .no-results {
-      text-align: center;
-      color: #8892b0;
-      font-size: 18px;
-      margin: 40px 0;
-      grid-column: 1 / -1;
-    }
-
-    footer {
-      margin-top: 40px;
-      font-size: 14px;
-      text-align: center;
-      color: #495670;
-      padding: 20px 0;
-      width: 100%;
-      max-width: 900px;
-      border-top: 1px solid rgba(100, 255, 218, 0.1);
-    }
-
-    /* Адаптивность для мобильных устройств */
-    @media (max-width: 768px) {
-      body {
-        padding: 15px;
-      }
-      
-      .logo {
-        font-size: 36px;
-      }
-      
-      .tagline {
-        font-size: 16px;
-      }
-      
-      .search-container {
-        flex-direction: column;
-      }
-      
-      .anime-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 20px;
-      }
-      
-      .anime-preview {
-        height: 280px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .logo {
-        font-size: 28px;
-      }
-      
-      .anime-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-      }
-      
-      .anime-preview {
-        height: 250px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniWatch - Главная страница</title>
+    <link rel="stylesheet" href="static/css/index.css">
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <header>
-      <h1 class="logo">AniWatch</h1>
-      <p class="tagline">Лучшие аниме сериалы в одном месте</p>
+        <h1 class="logo">AniWatch</h1>
+        <p class="tagline">Лучшие аниме сериалы в одном месте</p>
     </header>
-    
-    <div class="search-container">
-      <input type="text" class="search-input" id="searchInput" placeholder="Введите название аниме...">
-      <button class="search-btn" id="searchBtn">Поиск</button>
-    </div>
-    
-    <main>
-      <div class="anime-grid" id="animeGrid">
-        <!-- Карточки аниме будут добавлены через JavaScript -->
-      </div>
-    </main>
-    
-    <footer>
-      © 2025 AniWatch - Все права защищены
-    </footer>
-  </div>
 
-  <script>
+    <div class="search-container">
+        <input type="text" class="search-input" id="searchInput"
+               placeholder="Введите название аниме...">
+        <button class="search-btn" id="searchBtn">Поиск</button>
+    </div>
+
+    <main>
+        <div class="anime-grid" id="animeGrid">
+            <!-- Карточки аниме будут добавлены через JavaScript -->
+        </div>
+    </main>
+
+    <footer>
+        © 2025 AniWatch - Все права защищены
+    </footer>
+</div>
+
+<script>
     // Массив с данными об аниме
     const animeList = [
-      {
-        btnname: "Мой братик больше не братик!",
-        previewUrl: "onimai.jpg",
-        scene: "onimai.html"
-      },
-      {
-        btnname: "Реинкарнация безработного.",
-        previewUrl: "mushoku.jpg",
-        scene: "mushoku.html"
-      },
-      {
-        btnname: "Хроники Акаши.",
-        previewUrl: "akashi.jpeg",
-        scene: "akashi.html"
-      },
-      {
-        btnname: "Создатель Магии в ином мире.",
-        previewUrl: "magic.jpg",
-        scene: "magic.html"
-      },
-      {
-        btnname: "Добро пожаловать в N.H.K.",
-        previewUrl: "nhk.jpg",
-        scene: "nhk.html"
-      },
-      {
-        btnname: "Девочка Волшебница Мадока-Магика.",
-        previewUrl: "madoka.jpg",
-        scene: "madoka.html"
-      }
+        {
+            btnname: "Мой братик больше не братик!",
+            previewUrl: "static/images/onimai.jpg",
+            scene: "onimai.html"
+        },
+        {
+            btnname: "Реинкарнация безработного.",
+            previewUrl: "static/images/mushoku.jpg",
+            scene: "mushoku.html"
+        },
+        {
+            btnname: "Хроники Акаши.",
+            previewUrl: "static/images/akashi.jpeg",
+            scene: "akashi.html"
+        },
+        {
+            btnname: "Создатель Магии в ином мире.",
+            previewUrl: "static/images/magic.jpg",
+            scene: "magic.html"
+        },
+        {
+            btnname: "Добро пожаловать в N.H.K.",
+            previewUrl: "static/images/nhk.jpg",
+            scene: "nhk.html"
+        },
+        {
+            btnname: "Девочка Волшебница Мадока-Магика.",
+            previewUrl: "static/images/madoka.jpg",
+            scene: "madoka.html"
+        }
     ];
 
     // Функция для создания карточек аниме
     function createAnimeCards(filteredAnimeList = animeList) {
-      const animeGrid = document.getElementById('animeGrid');
-      animeGrid.innerHTML = '';
-      
-      if (filteredAnimeList.length === 0) {
-        animeGrid.innerHTML = '<div class="no-results">По вашему запросу ничего не найдено</div>';
-        return;
-      }
-      
-      filteredAnimeList.forEach(anime => {
-        const card = document.createElement('div');
-        card.className = 'anime-card';
-        
-        card.innerHTML = `
+        const animeGrid = document.getElementById('animeGrid');
+        animeGrid.innerHTML = '';
+
+        if (filteredAnimeList.length === 0) {
+            animeGrid.innerHTML = '<div class="no-results">По вашему запросу ничего не найдено</div>';
+            return;
+        }
+
+        filteredAnimeList.forEach(anime => {
+            const card = document.createElement('div');
+            card.className = 'anime-card';
+
+            card.innerHTML = `
           <img src="${anime.previewUrl}" alt="${anime.btnname}" class="anime-preview" onerror="this.src='https://via.placeholder.com/300x400/0a1120/64ffda?text=Превью+не+доступно'">
           <button class="anime-btn" onclick="navigateTo('${anime.scene}')">${anime.btnname}</button>
         `;
-        
-        animeGrid.appendChild(card);
-      });
+
+            animeGrid.appendChild(card);
+        });
     }
 
     // Функция для перехода на страницу аниме
     function navigateTo(scene) {
-      window.location.href = scene;
+        window.location.href = scene;
     }
 
     // Функция для поиска аниме
     function searchAnime() {
-      const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-      
-      if (searchTerm === '') {
-        createAnimeCards();
-        return;
-      }
-      
-      const filteredAnime = animeList.filter(anime => 
-        anime.btnname.toLowerCase().includes(searchTerm)
-      );
-      
-      createAnimeCards(filteredAnime);
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+
+        if (searchTerm === '') {
+            createAnimeCards();
+            return;
+        }
+
+        const filteredAnime = animeList.filter(anime =>
+            anime.btnname.toLowerCase().includes(searchTerm)
+        );
+
+        createAnimeCards(filteredAnime);
     }
 
     // Инициализация при загрузке страницы
     document.addEventListener('DOMContentLoaded', () => {
-      createAnimeCards();
-      
-      // Добавляем обработчики событий для поиска
-      document.getElementById('searchBtn').addEventListener('click', searchAnime);
-      document.getElementById('searchInput').addEventListener('keyup', (event) => {
-        if (event.key === 'Enter') {
-          searchAnime();
-        }
-      });
+        createAnimeCards();
+
+        // Добавляем обработчики событий для поиска
+        document.getElementById('searchBtn').addEventListener('click', searchAnime);
+        document.getElementById('searchInput').addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
+                searchAnime();
+            }
+        });
     });
-  </script>
+</script>
 </body>
 </html>
