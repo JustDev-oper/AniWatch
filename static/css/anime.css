@@ -1,0 +1,234 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #0a1120;
+    color: #e6f1ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.5;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #64ffda;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #8892b0;
+    font-weight: 400;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.video-container video {
+    width: 100%;
+    display: block;
+}
+
+.video-js {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+}
+
+.info-section {
+    width: 100%;
+    max-width: 900px;
+    padding: 0 10px;
+}
+
+.info-title {
+    color: #64ffda;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.info-text {
+    color: #a8b2d1;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.save-indicator {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(100, 255, 218, 0.9);
+    color: #0a1120;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.save-indicator.show {
+    opacity: 1;
+}
+
+footer {
+    margin-top: 40px;
+    font-size: 14px;
+    text-align: center;
+    color: #495670;
+    padding: 20px 0;
+    width: 100%;
+    max-width: 900px;
+    border-top: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+/* Кастомные стили для видеоплеера */
+.video-js .vjs-control-bar {
+    background: rgba(10, 17, 32, 0.9);
+    font-size: 14px;
+    height: 50px;
+}
+
+.video-js .vjs-play-progress,
+.video-js .vjs-volume-level {
+    background-color: #64ffda;
+}
+
+.video-js .vjs-slider {
+    background-color: rgba(100, 255, 218, 0.2);
+}
+
+.video-js .vjs-big-play-button {
+    background-color: rgba(100, 255, 218, 0.2);
+    border: 1px solid #64ffda;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    margin-top: -40px;
+    margin-left: -40px;
+}
+
+.video-js:hover .vjs-big-play-button {
+    background-color: rgba(100, 255, 218, 0.3);
+}
+
+/* Исправление отображения времени */
+.video-js .vjs-time-control {
+    font-size: 14px;
+    padding: 0 8px;
+    display: block !important;
+}
+
+.video-js .vjs-remaining-time {
+    display: none !important;
+}
+
+.video-js .vjs-duration,
+.video-js .vjs-current-time {
+    color: #e6f1ff;
+    font-size: 14px;
+    padding: 0 8px;
+}
+
+.video-js .vjs-time-divider {
+    color: #8892b0;
+    padding: 0 4px;
+    display: block !important;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    .title {
+        font-size: 20px;
+    }
+    
+    .subtitle {
+        font-size: 14px;
+    }
+    
+    .info-title {
+        font-size: 18px;
+    }
+    
+    .info-text {
+        font-size: 15px;
+    }
+    
+    .save-indicator {
+        top: 10px;
+        right: 10px;
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+    
+    .video-js .vjs-control-bar {
+        font-size: 12px;
+        height: 45px;
+    }
+    
+    .video-js .vjs-time-control {
+        font-size: 12px;
+        padding: 0 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 18px;
+    }
+    
+    .video-container {
+        border-radius: 4px;
+    }
+    
+    .video-js .vjs-time-control {
+        font-size: 11px;
+        padding: 0 4px;
+    }
+}
