@@ -3,7 +3,7 @@
     src: url('../fonts/tt-travels-next-trl-bd.ttf') format('woff2');
     font-weight: normal;
     font-style: normal;
-    font-display: swap; /* чтобы текст не был невидим при загрузке */
+    font-display: block;
 }
 
 * {
