@@ -99,6 +99,15 @@ main {
     padding: 0 15px;
 }
 
+.browser-warning {
+    text-align: center;
+    color: #FFD166; /* Более яркий цвет для предупреждения */
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+}
+
 .info-title {
     color: #FF9EBF;
     margin-bottom: 20px;
@@ -114,6 +123,7 @@ main {
     line-height: 1.7;
     font-weight: 400;
     letter-spacing: 0.01em;
+
 }
 
 .save-indicator {
