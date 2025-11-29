@@ -1,134 +1,136 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AniWatch - Главная страница</title>
     <link rel="stylesheet" href="static/css/index.css">
 </head>
-<body>
-<div class="container">
-    <header>
-        <h1 class="logo">AniWatch</h1>
-        <p class="tagline">Лучшие аниме сериалы в одном месте</p>
-    </header>
 
-    <div class="search-container">
-        <input type="text" class="search-input" id="searchInput"
-               placeholder="Введите название аниме...">
-        <button class="search-btn" id="searchBtn">Поиск</button>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">AniWatch</h1>
+            <p class="tagline">Лучшие аниме сериалы в одном месте</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Введите название аниме...">
+            <button class="search-btn" id="searchBtn">Поиск</button>
+        </div>
+
+        <main>
+            <div class="anime-grid" id="animeGrid">
+                <!-- Карточки аниме будут добавлены через JavaScript -->
+            </div>
+        </main>
+
+        <footer>
+            © 2025 AniWatch - Все права защищены
+        </footer>
     </div>
 
-    <main>
-        <div class="anime-grid" id="animeGrid">
-            <!-- Карточки аниме будут добавлены через JavaScript -->
-        </div>
-    </main>
-
-    <footer>
-        © 2025 AniWatch - Все права защищены
-    </footer>
-</div>
-
-<script>
-    // Массив с данными об аниме
-    const animeList = [
-        {
-            btnname: "Мой братик больше не братик!",
-            previewUrl: "static/images/onimai.jpg",
-            scene: "onimai.html"
-        },
-        {
-            btnname: "Реинкарнация безработного",
-            previewUrl: "static/images/mushoku.jpg",
-            scene: "mushoku.html"
-        },
-        {
-            btnname: "Хроники Акаши",
-            previewUrl: "static/images/akashi.jpeg",
-            scene: "akashi.html"
-        },
-        {
-            btnname: "Создатель Магии в ином мире",
-            previewUrl: "static/images/magic.jpg",
-            scene: "magic.html"
-        },
-        {
-            btnname: "Добро пожаловать в N.H.K",
-            previewUrl: "static/images/nhk.jpg",
-            scene: "nhk.html"
-        },
-        {
-            btnname: "Девочка Волшебница Мадока-Магика",
-            previewUrl: "static/images/madoka.jpg",
-            scene: "madoka.html"
-        }
-    ];
-
-    // Функция для создания карточек аниме
-    function createAnimeCards(filteredAnimeList = animeList) {
-        const animeGrid = document.getElementById('animeGrid');
-        animeGrid.innerHTML = '';
-
-        if (filteredAnimeList.length === 0) {
-            animeGrid.innerHTML = '<div class="no-results">По вашему запросу ничего не найдено</div>';
-            return;
-        }
-
-        filteredAnimeList.forEach(anime => {
-            const card = document.createElement('div');
-            card.className = 'anime-card';
-
-            card.innerHTML = `
-          <img src="${anime.previewUrl}" alt="${anime.btnname}" class="anime-preview" onerror="this.src='https://via.placeholder.com/300x400/0a1120/64ffda?text=Превью+не+доступно'">
-          <button class="anime-btn" onclick="navigateTo('${anime.scene}'); e.stopPropagation();" style="height: 60px; display: flex; align-items: center; justify-content: center;">${anime.btnname}</button>
-        `;
-
-            // Добавляем обработчик клика на всю карточку
-            card.addEventListener('click', (e) => {
-              // Проверяем, что клик не по кнопке
-              if (!e.target.classList.contains('anime-btn')) {
-                navigateTo(anime.scene);
-              }
-            });
-
-            animeGrid.appendChild(card);
-        });
-    }
-
-    // Функция для перехода на страницу аниме
-    function navigateTo(scene) {
-        window.location.href = scene;
-    }
-
-    // Функция для поиска аниме
-    function searchAnime() {
-        const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-
-        if (searchTerm === '') {
-            createAnimeCards();
-            return;
-        }
-
-        const filteredAnime = animeList.filter(anime =>
-            anime.btnname.toLowerCase().includes(searchTerm)
-        );
-
-        createAnimeCards(filteredAnime);
-    }
-
-    // Инициализация при загрузке страницы
-    document.addEventListener('DOMContentLoaded', () => {
-        createAnimeCards();
-
-        // Добавляем обработчики событий для поиска
-        document.getElementById('searchBtn').addEventListener('click', searchAnime);
-        document.getElementById('searchInput').addEventListener('keyup', (event) => {
-            if (event.key === 'Enter') {
-                searchAnime();
+    <script>
+        // Массив с данными об аниме
+        const animeList = [
+            {
+                btnname: "Мой братик больше не братик!",
+                previewUrl: "static/images/onimai.jpg",
+                scene: "onimai.html"
+            },
+            {
+                btnname: "Реинкарнация безработного",
+                previewUrl: "static/images/mushoku.jpg",
+                scene: "mushoku.html"
+            },
+            {
+                btnname: "Хроники Акаши",
+                previewUrl: "static/images/akashi.jpeg",
+                scene: "akashi.html"
+            },
+            {
+                btnname: "Создатель Магии в ином мире",
+                previewUrl: "static/images/magic.jpg",
+                scene: "magic.html"
+            },
+            {
+                btnname: "Добро пожаловать в N.H.K",
+                previewUrl: "static/images/nhk.jpg",
+                scene: "nhk.html"
+            },
+            {
+                btnname: "Девочка Волшебница Мадока-Магика",
+                previewUrl: "static/images/madoka.jpg",
+                scene: "madoka.html"
             }
+        ];
+
+        // Функция для создания карточек аниме
+        function createAnimeCards(filteredAnimeList = animeList) {
+            const animeGrid = document.getElementById('animeGrid');
+            animeGrid.innerHTML = '';
+
+            if (filteredAnimeList.length === 0) {
+                animeGrid.innerHTML = '<div class="no-results">По вашему запросу ничего не найдено</div>';
+                return;
+            }
+
+            filteredAnimeList.forEach(anime => {
+                const card = document.createElement('div');
+                card.className = 'anime-card';
+
+                card.innerHTML = `
+                    <img src="${anime.previewUrl}" alt="${anime.btnname}" class="anime-preview" loading="lazy" onerror="this.src='https://via.placeholder.com/300x400/0a1120/64ffda?text=Превью+не+доступно'">
+                    <button class="anime-btn" onclick="event.stopPropagation(); navigateTo('${anime.scene}');">${anime.btnname}</button>
+                `;
+
+                // Добавляем обработчик клика на всю карточку
+                card.addEventListener('click', (e) => {
+                    // Проверяем, что клик не по кнопке
+                    if (!e.target.classList.contains('anime-btn')) {
+                        navigateTo(anime.scene);
+                    }
+                });
+
+                animeGrid.appendChild(card);
+            });
+        }
+
+        // Функция для перехода на страницу аниме
+        function navigateTo(scene) {
+            window.location.href = scene;
+        }
+
+        // Функция для поиска аниме
+        function searchAnime() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+
+            if (searchTerm === '') {
+                createAnimeCards();
+                return;
+            }
+
+            const filteredAnime = animeList.filter(anime =>
+                anime.btnname.toLowerCase().includes(searchTerm)
+            );
+
+            createAnimeCards(filteredAnime);
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            createAnimeCards();
+
+            // Добавляем обработчики событий для поиска
+            document.getElementById('searchBtn').addEventListener('click', searchAnime);
+            document.getElementById('searchInput').addEventListener('keyup', (event) => {
+                if (event.key === 'Enter') {
+                    searchAnime();
+                }
+            });
         });
-    });
-</script>
+    </script>
 </body>
+
 </html>
