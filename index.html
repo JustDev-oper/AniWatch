@@ -39,27 +39,27 @@
             scene: "onimai.html"
         },
         {
-            btnname: "Реинкарнация безработного.",
+            btnname: "Реинкарнация безработного",
             previewUrl: "static/images/mushoku.jpg",
             scene: "mushoku.html"
         },
         {
-            btnname: "Хроники Акаши.",
+            btnname: "Хроники Акаши",
             previewUrl: "static/images/akashi.jpeg",
             scene: "akashi.html"
         },
         {
-            btnname: "Создатель Магии в ином мире.",
+            btnname: "Создатель Магии в ином мире",
             previewUrl: "static/images/magic.jpg",
             scene: "magic.html"
         },
         {
-            btnname: "Добро пожаловать в N.H.K.",
+            btnname: "Добро пожаловать в N.H.K",
             previewUrl: "static/images/nhk.jpg",
             scene: "nhk.html"
         },
         {
-            btnname: "Девочка Волшебница Мадока-Магика.",
+            btnname: "Девочка Волшебница Мадока-Магика",
             previewUrl: "static/images/madoka.jpg",
             scene: "madoka.html"
         }
@@ -81,8 +81,16 @@
 
             card.innerHTML = `
           <img src="${anime.previewUrl}" alt="${anime.btnname}" class="anime-preview" onerror="this.src='https://via.placeholder.com/300x400/0a1120/64ffda?text=Превью+не+доступно'">
-          <button class="anime-btn" onclick="navigateTo('${anime.scene}')">${anime.btnname}</button>
+          <button class="anime-btn" onclick="navigateTo('${anime.scene}'); e.stopPropagation();" style="height: 60px; display: flex; align-items: center; justify-content: center;">${anime.btnname}</button>
         `;
+
+            // Добавляем обработчик клика на всю карточку
+            card.addEventListener('click', (e) => {
+              // Проверяем, что клик не по кнопке
+              if (!e.target.classList.contains('anime-btn')) {
+                navigateTo(anime.scene);
+              }
+            });
 
             animeGrid.appendChild(card);
         });
