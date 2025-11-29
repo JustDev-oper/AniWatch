@@ -5,15 +5,16 @@
 }
 
 body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background: #0a1120;
+    font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #141414;
     color: #e6f1ff;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
-    line-height: 1.5;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
 }
 
 .container {
@@ -27,22 +28,27 @@ body {
 header {
     width: 100%;
     text-align: center;
-    margin-bottom: 30px;
-    padding: 20px 0;
+    margin-bottom: 40px;
+    padding: 30px 0;
 }
 
 .title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #64ffda;
-    margin-bottom: 8px;
-    letter-spacing: 0.5px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FF9EBF;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 4px rgba(255, 158, 191, 0.2);
+    font-feature-settings: 'salt' on, 'ss01' on;
 }
 
 .subtitle {
-    font-size: 16px;
-    color: #8892b0;
+    font-size: 1.1rem;
+    color: #b0b0b0;
     font-weight: 400;
+    letter-spacing: 0.01em;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 main {
@@ -50,7 +56,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 40px;
 }
 
 .video-container {
@@ -58,9 +64,10 @@ main {
     width: 100%;
     max-width: 900px;
     background: #000;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 158, 191, 0.1);
 }
 
 .video-container video {
@@ -77,88 +84,102 @@ main {
 .info-section {
     width: 100%;
     max-width: 900px;
-    padding: 0 10px;
+    padding: 0 15px;
 }
 
 .info-title {
-    color: #64ffda;
-    margin-bottom: 15px;
-    font-size: 20px;
-    font-weight: 500;
+    color: #FF9EBF;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-feature-settings: 'salt' on;
 }
 
 .info-text {
-    color: #a8b2d1;
-    font-size: 16px;
-    line-height: 1.6;
+    color: #d0d0d0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    font-weight: 400;
+    letter-spacing: 0.01em;
 }
 
 .save-indicator {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    background: rgba(100, 255, 218, 0.9);
-    color: #0a1120;
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
+    top: 25px;
+    right: 25px;
+    background: rgba(255, 158, 191, 0.95);
+    color: #141414;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
     z-index: 1000;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 158, 191, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 158, 191, 0.3);
 }
 
 .save-indicator.show {
     opacity: 1;
+    transform: translateY(0);
 }
 
 footer {
-    margin-top: 40px;
-    font-size: 14px;
+    margin-top: 50px;
+    font-size: 0.9rem;
     text-align: center;
-    color: #495670;
-    padding: 20px 0;
+    color: #888;
+    padding: 25px 0;
     width: 100%;
     max-width: 900px;
-    border-top: 1px solid rgba(100, 255, 218, 0.1);
+    border-top: 1px solid rgba(255, 158, 191, 0.15);
+    letter-spacing: 0.02em;
 }
 
 /* Кастомные стили для видеоплеера */
 .video-js .vjs-control-bar {
-    background: rgba(10, 17, 32, 0.9);
+    background: rgba(20, 20, 20, 0.95);
     font-size: 14px;
-    height: 50px;
+    height: 52px;
+    backdrop-filter: blur(10px);
 }
 
 .video-js .vjs-play-progress,
 .video-js .vjs-volume-level {
-    background-color: #64ffda;
+    background-color: #FF9EBF;
 }
 
 .video-js .vjs-slider {
-    background-color: rgba(100, 255, 218, 0.2);
+    background-color: rgba(255, 158, 191, 0.25);
 }
 
 .video-js .vjs-big-play-button {
-    background-color: rgba(100, 255, 218, 0.2);
-    border: 1px solid #64ffda;
+    background-color: rgba(255, 158, 191, 0.2);
+    border: 2px solid #FF9EBF;
     border-radius: 50%;
     width: 80px;
     height: 80px;
     line-height: 80px;
     margin-top: -40px;
     margin-left: -40px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
 }
 
 .video-js:hover .vjs-big-play-button {
-    background-color: rgba(100, 255, 218, 0.3);
+    background-color: rgba(255, 158, 191, 0.3);
+    transform: scale(1.05);
 }
 
 /* Исправление отображения времени */
 .video-js .vjs-time-control {
     font-size: 14px;
-    padding: 0 8px;
+    padding: 0 10px;
     display: block !important;
+    font-weight: 500;
 }
 
 .video-js .vjs-remaining-time {
@@ -169,13 +190,32 @@ footer {
 .video-js .vjs-current-time {
     color: #e6f1ff;
     font-size: 14px;
-    padding: 0 8px;
+    padding: 0 10px;
+    font-weight: 500;
 }
 
 .video-js .vjs-time-divider {
-    color: #8892b0;
-    padding: 0 4px;
+    color: #b0b0b0;
+    padding: 0 6px;
     display: block !important;
+    font-weight: 500;
+}
+
+/* Стилизация других элементов плеера */
+.video-js .vjs-progress-control:hover .vjs-progress-holder {
+    font-size: 1.3em;
+}
+
+.video-js .vjs-play-control .vjs-icon-placeholder:before {
+    color: #FF9EBF;
+}
+
+.video-js .vjs-mute-control .vjs-icon-placeholder:before {
+    color: #FF9EBF;
+}
+
+.video-js .vjs-fullscreen-control .vjs-icon-placeholder:before {
+    color: #FF9EBF;
 }
 
 /* Адаптивность для мобильных устройств */
@@ -185,50 +225,75 @@ footer {
     }
     
     .title {
-        font-size: 20px;
+        font-size: 2rem;
     }
     
     .subtitle {
-        font-size: 14px;
+        font-size: 1rem;
     }
     
     .info-title {
-        font-size: 18px;
+        font-size: 1.3rem;
     }
     
     .info-text {
-        font-size: 15px;
+        font-size: 1rem;
     }
     
     .save-indicator {
-        top: 10px;
-        right: 10px;
-        font-size: 12px;
-        padding: 6px 10px;
+        top: 15px;
+        right: 15px;
+        font-size: 0.8rem;
+        padding: 8px 12px;
     }
     
     .video-js .vjs-control-bar {
-        font-size: 12px;
-        height: 45px;
+        font-size: 13px;
+        height: 48px;
+    }
+    
+    .video-js .vjs-time-control {
+        font-size: 13px;
+        padding: 0 8px;
+    }
+    
+    .video-js .vjs-big-play-button {
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+        margin-top: -35px;
+        margin-left: -35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.7rem;
+    }
+    
+    .video-container {
+        border-radius: 8px;
     }
     
     .video-js .vjs-time-control {
         font-size: 12px;
         padding: 0 6px;
     }
-}
-
-@media (max-width: 480px) {
-    .title {
-        font-size: 18px;
+    
+    .video-js .vjs-big-play-button {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        margin-top: -30px;
+        margin-left: -30px;
     }
     
-    .video-container {
-        border-radius: 4px;
+    header {
+        margin-bottom: 30px;
+        padding: 20px 0;
     }
     
-    .video-js .vjs-time-control {
-        font-size: 11px;
-        padding: 0 4px;
+    main {
+        gap: 30px;
     }
 }
