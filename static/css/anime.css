@@ -135,6 +135,15 @@ main {
   padding: 0 15px;
 }
 
+.browser-warning {
+  text-align: center;
+  color: #e0d0d9;
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
 .info-title {
   color: #ff9ebf;
   margin-bottom: 20px;
@@ -145,7 +154,7 @@ main {
 }
 
 .info-text {
-  color: #d0d0d0;
+  color: #e0d0d9;
   font-size: 1.05rem;
   line-height: 1.7;
   font-weight: 400;
