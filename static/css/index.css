@@ -246,6 +246,50 @@ main {
     letter-spacing: 0.02em;
 }
 
+/* Стили для кнопки Telegram */
+.telegram-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 25px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.telegram-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 28px;
+    background: rgba(0, 136, 204, 0.15);
+    border: 2px solid rgba(0, 136, 204, 0.4);
+    border-radius: 10px;
+    color: #0088cc;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.02em;
+    backdrop-filter: blur(10px);
+    font-family: inherit;
+}
+
+.telegram-btn:hover {
+    background: rgba(0, 136, 204, 0.25);
+    box-shadow: 0 0 15px rgba(0, 136, 204, 0.3);
+    transform: translateY(-1px);
+    border-color: rgba(0, 136, 204, 0.6);
+}
+
+.telegram-btn:active {
+    transform: translateY(0);
+}
+
+.telegram-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
 footer {
     margin-top: 45px;
     font-size: 0.9rem;
@@ -291,6 +335,15 @@ footer {
         padding: 12px 18px;
     }
 
+    .telegram-container {
+        margin: 20px 0;
+    }
+    
+    .telegram-btn {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+    }
+
     /* Уменьшаем прозрачность фона на мобильных */
     body::before {
         opacity: 0.1;
@@ -328,6 +381,16 @@ footer {
     .search-input,
     .search-btn {
         font-size: 0.95rem;
+    }
+
+    .telegram-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .telegram-icon {
+        width: 18px;
+        height: 18px;
     }
 }
 
