@@ -6,6 +6,106 @@
     <title>Акашийские хроники худшего преподавателя магии. Все серии [AniDub]</title>
     <link href="https://vjs.zencdn.net/8.23.4/video-js.css" rel="stylesheet"/>
     <link rel="stylesheet" href="static/css/anime.css">
+    <style>
+        /* Стили для индикатора перемотки */
+        .rewind-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+            display: none;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .rewind-indicator.show {
+            display: block;
+            opacity: 1;
+            animation: fadeOut 1.5s ease forwards 0.7s;
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        
+        .video-container {
+            position: relative;
+        }
+        
+        /* Стили для кастомных кнопок перемотки */
+        .vjs-rewind-buttons {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        
+        .vjs-rewind-button {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            font-size: 20px;
+            width: 50px;
+            height: 35px;
+            border-radius: 25px;
+            margin: 0 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .vjs-rewind-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+        
+        .vjs-rewind-button:active {
+            transform: scale(0.95);
+            background: rgba(255, 255, 255, 0.35);
+        }
+        
+        /* Специфичные стили для каждой кнопки */
+        .vjs-rewind-back {
+            border: 1px solid rgba(255, 100, 100, 0.4);
+        }
+        
+        .vjs-rewind-forward {
+            border: 1px solid rgba(100, 255, 100, 0.4);
+        }
+        
+        /* Интеграция кнопок в control bar */
+        .vjs-control-bar {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Адаптивность для мобильных */
+        @media (max-width: 768px) {
+            .vjs-rewind-button {
+                width: 45px;
+                height: 32px;
+                font-size: 18px;
+                margin: 0 3px;
+            }
+            
+            .vjs-rewind-buttons {
+                margin-right: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -33,6 +133,8 @@
                     HTML5 видео
                 </p>
             </video>
+            <!-- Индикатор перемотки -->
+            <div class="rewind-indicator" id="rewindIndicator"></div>
         </section>
 
         <section class="info-section">
@@ -63,8 +165,9 @@
         }
     });
 
-    // Элемент для показа уведомлений
+    // Элементы для показа уведомлений
     const saveIndicator = document.getElementById('saveIndicator');
+    const rewindIndicator = document.getElementById('rewindIndicator');
 
     // Функция для показа уведомления
     function showSaveIndicator() {
@@ -77,6 +180,78 @@
     // Ключ для сохранения в localStorage
     const VIDEO_POSITION_KEY = 'myBratikVideoPosition';
     const SAVE_INTERVAL = 3000;
+
+    // Настройки перемотки
+    const REWIND_AMOUNT = 10; // секунды
+
+    // Функция для перемотки видео
+    function rewindVideo(direction) {
+        const currentTime = player.currentTime();
+        let newTime;
+        let message;
+        
+        if (direction === 'forward') {
+            newTime = Math.min(currentTime + REWIND_AMOUNT, player.duration());
+            message = `❯ ${REWIND_AMOUNT} сек`;
+        } else {
+            newTime = Math.max(currentTime - REWIND_AMOUNT, 0);
+            message = `❮ ${REWIND_AMOUNT} сек`;
+        }
+        
+        player.currentTime(newTime);
+        
+        // Сначала скрываем индикатор, чтобы сбросить анимацию
+        rewindIndicator.classList.remove('show');
+        
+        // Ждем немного и показываем снова для плавного появления
+        setTimeout(() => {
+            rewindIndicator.textContent = message;
+            rewindIndicator.classList.add('show');
+        }, 10);
+        
+        // Сохраняем позицию
+        saveVideoPosition();
+    }
+
+    // Создание кастомных кнопок перемотки
+    function createRewindButtons() {
+        // Создаем контейнер для кнопок
+        const rewindButtons = document.createElement('div');
+        rewindButtons.className = 'vjs-rewind-buttons vjs-control';
+        
+        // Создаем кнопку "назад"
+        const rewindBackButton = document.createElement('button');
+        rewindBackButton.className = 'vjs-rewind-button vjs-rewind-back';
+        rewindBackButton.innerHTML = '❮';
+        rewindBackButton.title = 'Назад 10 секунд';
+        rewindBackButton.addEventListener('click', function() {
+            rewindVideo('backward');
+        });
+        
+        // Создаем кнопку "вперед"
+        const rewindForwardButton = document.createElement('button');
+        rewindForwardButton.className = 'vjs-rewind-button vjs-rewind-forward';
+        rewindForwardButton.innerHTML = '❯';
+        rewindForwardButton.title = 'Вперед 10 секунд';
+        rewindForwardButton.addEventListener('click', function() {
+            rewindVideo('forward');
+        });
+        
+        // Добавляем кнопки в контейнер
+        rewindButtons.appendChild(rewindBackButton);
+        rewindButtons.appendChild(rewindForwardButton);
+        
+        // Находим control bar и добавляем кнопки перед кнопкой полноэкранного режима
+        const controlBar = player.controlBar.el();
+        const fullscreenButton = controlBar.querySelector('.vjs-fullscreen-control');
+        
+        if (fullscreenButton) {
+            controlBar.insertBefore(rewindButtons, fullscreenButton);
+        } else {
+            // Если кнопки полноэкранного режима нет, добавляем в конец
+            controlBar.appendChild(rewindButtons);
+        }
+    }
 
     // Загрузка сохраненной позиции
     function loadVideoPosition() {
@@ -130,6 +305,9 @@
 
     player.ready(function () {
         console.log('Плеер готов');
+
+        // Создаем кнопки перемотки
+        createRewindButtons();
 
         // Загружаем сохраненную позицию
         setTimeout(loadVideoPosition, 1000);
