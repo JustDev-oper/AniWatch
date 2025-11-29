@@ -99,6 +99,15 @@ main {
     padding: 0 15px;
 }
 
+.browser-warning {
+    text-align: center;
+    color: #E0D0D9;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+}
+
 .info-title {
     color: #FF9EBF;
     margin-bottom: 20px;
@@ -109,11 +118,12 @@ main {
 }
 
 .info-text {
-    color: #d0d0d0;
+    color: #E0D0D9;
     font-size: 1.05rem;
     line-height: 1.7;
     font-weight: 400;
     letter-spacing: 0.01em;
+
 }
 
 .save-indicator {
