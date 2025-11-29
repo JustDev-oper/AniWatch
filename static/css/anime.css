@@ -101,7 +101,7 @@ main {
 
 .browser-warning {
     text-align: center;
-    color: #FFD166; /* Более яркий цвет для предупреждения */
+    color: #E0D0D9;
     font-weight: 600;
     margin-bottom: 15px;
     font-size: 1.05rem;
@@ -118,7 +118,7 @@ main {
 }
 
 .info-text {
-    color: #d0d0d0;
+    color: #E0D0D9;
     font-size: 1.05rem;
     line-height: 1.7;
     font-weight: 400;
