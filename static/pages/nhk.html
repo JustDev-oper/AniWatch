@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Твоё имя</title>
+    <title>Добро пожаловать в N.H.K, Все серии.</title>
     <link href="https://vjs.zencdn.net/8.23.4/video-js.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="static/css/anime.css">
+    <link rel="stylesheet" href="../css/anime.css">
     <style>
         /* Стили для индикатора перемотки */
         .rewind-indicator {
@@ -112,8 +112,8 @@
     <div class="save-indicator" id="saveIndicator">Позиция сохранена</div>
 
     <header>
-        <h1 class="title">Твое имя</h1>
-        <p class="subtitle"></p>
+        <h1 class="title">Добро пожаловать в N.H.K</h1>
+        <p class="subtitle">Все серии</p>
     </header>
 
     <main>
@@ -126,7 +126,7 @@
                     poster=""
                     data-setup='{}'
             >
-                <source src="https://vkvd340.okcdn.ru/?srcIp=89.46.131.155&pr=40&expires=1764956876751&srcAg=CHROME&fromCache=1&ms=185.226.52.189&type=2&subId=6514737744469&sig=hY6ME-BYa3I&ct=0&urls=185.226.55.183&clientType=13&appId=512000384397&zs=43&id=7699090967125"
+                <source src="https://vkvd514.okcdn.ru/?expires=1764675523651&srcIp=89.46.131.155&pr=40&srcAg=CHROME&ms=185.226.55.152&type=2&subId=8337745644048&sig=cfdHYcIxQ_g&ct=0&urls=45.136.22.165&clientType=13&appId=512000384397&zs=43&id=7885850807000"
                         type="video/mp4"/>
                 <p class="vjs-no-js">
                     Включите JavaScript и используйте браузер, поддерживающий
@@ -141,8 +141,11 @@
     <div class="browser-warning">
         Рекомендуем использовать браузер Chrome!
     </div>
-            <h2 class="info-title">О фильме</h2>
-            <p class="info-text">История о парне из Токио и девушке из провинции, которые обнаруживают, что между ними существует странная и необъяснимая связь. Во сне они меняются телами и проживают жизни друг друга. Но однажды эта способность исчезает так же внезапно, как появилась. Тако решает во что бы то ни стало отыскать Мицуху, но способны ли они узнать друг друга в реальной жизни?</p>
+            <h2 class="info-title">О сериале</h2>
+            <p class="info-text">«Добро пожаловать в NHK!» — это история о
+                Тацухиро Сато, 22-летнем хикикомори (затворнике), который
+                верит, что за его проблемами стоит таинственная организация
+                «NHK». </p>
         </section>
     </main>
 
@@ -178,7 +181,7 @@
     }
 
     // Ключ для сохранения в localStorage
-    const VIDEO_POSITION_KEY = 'name';
+    const VIDEO_POSITION_KEY = 'nhk';
     const SAVE_INTERVAL = 3000;
 
     // Настройки перемотки
