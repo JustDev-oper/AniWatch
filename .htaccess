@@ -1,0 +1,16 @@
+RewriteEngine On
+RewriteBase /
+
+# Локальные перенаправления для аниме
+RewriteRule ^Nekopara/?$ /static/pages/Nekopara/nekopara.html [L]
+RewriteRule ^Onimai/?$ /static/pages/Onimai/onimai.html [L]
+RewriteRule ^Mushoku-Tensei/?$ /static/pages/Mushoku-Tensei/mushoku.html [L]
+RewriteRule ^Akashic-records/?$ /static/pages/Akashic-records/akashi.html [L]
+RewriteRule ^Magic-creator/?$ /static/pages/Magic-creator/magic.html [L]
+RewriteRule ^Welcome-to-NHK/?$ /static/pages/Welcome-to-NHK/nhk.html [L]
+RewriteRule ^Madoka/?$ /static/pages/Madoka/madoka.html [L]
+RewriteRule ^Made-in-abyss/?$ /static/pages/Made-in-abyss/abyss.html [L]
+RewriteRule ^Magic-girls/?$ /static/pages/Magic-girls/magic-girls.html [L]
+RewriteRule ^Another-world-with-smartphone/?$ /static/pages/Another-world-with-smartphone/another.html [L]
+RewriteRule ^Voice-Form/?$ /static/pages/Voice-Form/voice-form.html [L]
+RewriteRule ^Your-name/?$ /static/pages/Your-name/name.html [L]
