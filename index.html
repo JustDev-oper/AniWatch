@@ -46,62 +46,62 @@
         {
             btnname: "Мой братик больше не братик!",
             previewUrl: "static/images/onimai.jpg",
-            scene: "onimai.html"
+            scene: "static/pages/onimai.html"
         },
         {
             btnname: "Реинкарнация безработного",
             previewUrl: "static/images/mushoku.jpg",
-            scene: "mushoku.html"
+            scene: "static/pages/mushoku.html"
         },
         {
             btnname: "Хроники Акаши",
             previewUrl: "static/images/akashi.jpeg",
-            scene: "akashi.html"
+            scene: "static/pages/akashi.html"
         },
         {
             btnname: "Создатель Магии в ином мире",
             previewUrl: "static/images/magic.jpg",
-            scene: "magic.html"
+            scene: "static/pages/magic.html"
         },
         {
             btnname: "Добро пожаловать в N.H.K",
             previewUrl: "static/images/nhk.jpg",
-            scene: "nhk.html"
+            scene: "static/pages/nhk.html"
         },
         {
             btnname: "Девочка Волшебница Мадока-Магика",
             previewUrl: "static/images/madoka.jpg",
-            scene: "madoka.html"
+            scene: "static/pages/madoka.html"
         },
         {
             btnname: "Созданный в бездне 1 сезон",
             previewUrl: "static/images/abyss.jpg",
-            scene: "abyss.html"
+            scene: "static/pages/abyss.html"
         },
         {
             btnname: "Кошачий рай",
             previewUrl: "static/images/nekopara.webp",
-            scene: "nekopara.html"
+            scene: "static/pages/nekopara.html"
         },
         {
             btnname: "Сайт девочек волшебниц",
             previewUrl: "static/images/magic-girls.webp",
-            scene: "magic-girls.html"
+            scene: "static/pages/magic-girls.html"
         },
         {
             btnname: "В другом мире со смартфоном",
             previewUrl: "static/images/another.jpg",
-            scene: "another.html"
+            scene: "static/pages/another.html"
         },
         {
             btnname: "Форма голоса",
             previewUrl: "static/images/voice-form.jpg",
-            scene: "voice-form.html"
+            scene: "static/pages/voice-form.html"
         },
-       {
+        {
             btnname: "Твоё имя",
             previewUrl: "static/images/name.jpg",
-            scene: "name.html"
+            scene: "static/pages/name.html"
         }
     ];
 
@@ -126,10 +126,10 @@
 
             // Добавляем обработчик клика на всю карточку
             card.addEventListener('click', (e) => {
-              // Проверяем, что клик не по кнопке
-              if (!e.target.classList.contains('anime-btn')) {
-                navigateTo(anime.scene);
-              }
+                // Проверяем, что клик не по кнопке
+                if (!e.target.classList.contains('anime-btn')) {
+                    navigateTo(anime.scene);
+                }
             });
 
             animeGrid.appendChild(card);
