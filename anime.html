@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Загрузка...</title>
+
+    <link href="https://vjs.zencdn.net/8.23.4/video-js.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./static/css/anime.css">
+
+    <style>
+        /* Твои стили перемотки (оставил как есть) */
+        .rewind-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+            display: none;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .rewind-indicator.show {
+            display: block;
+            opacity: 1;
+            animation: fadeOut 1.5s ease forwards 0.7s;
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        .video-container {
+            position: relative;
+        }
+
+        .vjs-rewind-buttons {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .vjs-rewind-button {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            font-size: 20px;
+            width: 50px;
+            height: 35px;
+            border-radius: 25px;
+            margin: 0 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .vjs-rewind-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .vjs-rewind-button {
+                width: 45px;
+                height: 32px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="save-indicator" id="saveIndicator">Позиция сохранена</div>
+
+    <header>
+        <h1 class="title" id="anime-title">Загрузка...</h1>
+        <p class="subtitle" id="anime-subtitle"></p>
+    </header>
+
+    <main>
+        <section class="video-container">
+            <video id="my-video" class="video-js vjs-default-skin" controls
+                   preload="auto" data-setup='{}'>
+                <source id="anime-video" src="" type="video/mp4"/>
+            </video>
+
+            <div class="rewind-indicator" id="rewindIndicator"></div>
+        </section>
+
+        <section class="info-section">
+            <div class="browser-warning">Рекомендуем использовать браузер
+                Chrome!
+            </div>
+            <h2 class="info-title">О сериале</h2>
+            <p class="info-text" id="anime-description">Загрузка
+                описания...</p>
+        </section>
+    </main>
+
+    <footer>
+        © 2025 Смотри аниме
+    </footer>
+</div>
+
+<script src="https://vjs.zencdn.net/8.23.4/video.min.js"></script>
+
+<script>
+    ///////////////////////////////////////////////////////////////////
+    // 1) ПОЛУЧЕНИЕ ID ИЗ URL
+    ///////////////////////////////////////////////////////////////////
+
+    function getAnimeId() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("id");
+    }
+
+    const animeId = getAnimeId();
+    if (!animeId) {
+        alert("ID аниме не передан в ссылке: ?id=XXXX");
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    // 2) ЗАГРУЗКА ДАННЫХ ИЗ API
+    ///////////////////////////////////////////////////////////////////
+
+    // ВСТАВЬ СВОЙ API URL
+    const API_URL = `https://aniwatch-backend-production.up.railway.app/api/v1/anime/${animeId}`;
+    const API_KEY = "poopgaymaster";
+
+    async function loadAnimeData() {
+        try {
+            const response = await fetch(API_URL, {
+                method: "GET",
+                headers: {
+                    "X-API-KEY": API_KEY
+                }
+            });
+            const anime = await response.json();
+
+            applyAnimeData(anime);
+
+        } catch (err) {
+            console.error("Ошибка загрузки API:", err);
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    // 3) ПОДСТАНОВКА ДАННЫХ НА СТРАНИЦУ
+    ///////////////////////////////////////////////////////////////////
+
+    function applyAnimeData(anime) {
+        // Подставляем данные из API
+        document.getElementById("anime-title").textContent = anime.title || "Без названия";
+        document.getElementById("anime-subtitle").textContent = anime.subTitle || "";
+        document.getElementById("anime-description").textContent = anime.description || "Описание отсутствует";
+        document.getElementById("page-title").textContent = anime.title || "Аниме";
+
+        // Вставляем видео
+        const videoSource = document.getElementById("anime-video");
+        if (anime.videoUrl) {
+            videoSource.src = anime.videoUrl;
+            player.src({type: "video/mp4", src: anime.videoUrl});
+        } else {
+            console.error("Видео для этого аниме не найдено.");
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    // 4) ИНИЦИАЛИЗАЦИЯ ПЛЕЕРА (оставил твой код)
+    ///////////////////////////////////////////////////////////////////
+
+    const player = videojs('my-video', {
+        fluid: true,
+        responsive: true,
+        playbackRates: [0.5, 1, 1.25, 1.5, 2],
+        controlBar: {volumePanel: {inline: false}}
+    });
+
+    const VIDEO_POSITION_KEY = "anime_position_" + animeId;
+    const SAVE_INTERVAL = 3000;
+    const REWIND_AMOUNT = 10;
+
+    const saveIndicator = document.getElementById('saveIndicator');
+    const rewindIndicator = document.getElementById('rewindIndicator');
+
+    function showSaveIndicator() {
+        saveIndicator.classList.add('show');
+        setTimeout(() => saveIndicator.classList.remove('show'), 2000);
+    }
+
+    function saveVideoPosition() {
+        const t = player.currentTime();
+        if (t > 0) localStorage.setItem(VIDEO_POSITION_KEY, t);
+    }
+
+    function loadVideoPosition() {
+        const t = parseFloat(localStorage.getItem(VIDEO_POSITION_KEY));
+        if (t) player.currentTime(t);
+    }
+
+    // Кнопки перемотки
+    function rewindVideo(dir) {
+        const t = player.currentTime();
+        const newTime = dir === "forward" ? t + REWIND_AMOUNT : t - REWIND_AMOUNT;
+
+        player.currentTime(Math.max(0, Math.min(newTime, player.duration())));
+
+        rewindIndicator.textContent = dir === "forward" ? `❯ ${REWIND_AMOUNT} сек` : `❮ ${REWIND_AMOUNT} сек`;
+        rewindIndicator.classList.add('show');
+
+        setTimeout(() => rewindIndicator.classList.remove('show'), 700);
+    }
+
+    function createRewindButtons() {
+        const container = document.createElement("div");
+        container.className = "vjs-rewind-buttons vjs-control";
+
+        const back = document.createElement("button");
+        back.className = "vjs-rewind-button";
+        back.innerHTML = "❮";
+        back.onclick = () => rewindVideo("backward");
+
+        const fw = document.createElement("button");
+        fw.className = "vjs-rewind-button";
+        fw.innerHTML = "❯";
+        fw.onclick = () => rewindVideo("forward");
+
+        container.appendChild(back);
+        container.appendChild(fw);
+
+        const bar = player.controlBar.el();
+        bar.insertBefore(container, bar.querySelector(".vjs-fullscreen-control"));
+    }
+
+    // Инициализация
+    player.ready(() => {
+        createRewindButtons();
+        setTimeout(loadVideoPosition, 1000);
+        setInterval(saveVideoPosition, SAVE_INTERVAL);
+
+        player.on("pause", () => {
+            saveVideoPosition();
+            showSaveIndicator();
+        });
+        player.on("seeked", () => setTimeout(saveVideoPosition, 300));
+        player.on("ended", () => localStorage.removeItem(VIDEO_POSITION_KEY));
+    });
+
+    // Сохраняем при закрытии вкладки
+    window.addEventListener("beforeunload", saveVideoPosition);
+
+    // Загружаем аниме
+    loadAnimeData();
+
+</script>
+</body>
+</html>
